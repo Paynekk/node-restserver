@@ -1,5 +1,10 @@
-require ('./config/config');
+require('./config/config');
+
+
 const express = require('express');
+const mongoose = require('mongoose');
+
+
 const app = express();
 
 const bodyParser = require('body-parser');
@@ -22,7 +27,7 @@ app.post('/usuario', function (req, res) {
 
 
         res.status(400).json({
-            ok:false,
+            ok: false,
             mensaje: 'El nombre es necesario'
         })
     } else {
@@ -47,6 +52,18 @@ app.put('/usuario/:id', function (req, res) {
 app.delete('/usuario', function (req, res) {
     res.json('delete usuario')
 });
+
+
+
+mongoose.connect('mongodb://localhost:27017/cafe', (err, resp) => {
+if (err) throw  err
+
+
+console.log('base de datos online con el puerto : ');
+
+
+});
+
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando el puerto', process.env.PORT);
